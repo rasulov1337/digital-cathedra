@@ -1,11 +1,9 @@
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from .models import Project, Task
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from django.shortcuts import render
 from .forms import FeedbackForm, ProjectForm, TaskForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView, DeleteView
@@ -63,7 +61,7 @@ def feedback_view(request):
             recipients = ['info@example.com']
             recipients.append(email)
 
-            send_mail('subject', message, email, recipients)
+            # send_mail('subject', message, email, recipients)
 
             return redirect('/tasks')
     else:
@@ -159,16 +157,16 @@ class TaskUpdateView(UpdateView):
                             kwargs={'project_id': self.object.project.id, 'task_id': self.object.id})
 
 
-# def delete_project(request, project_id):
-#     project = get_object_or_404(Project, pk=project_id)
-#     project.delete()
-#     return redirect('tasks:projects_list')
-#
-#
-# def delete_task(request, project_id, task_id):
-#     task = get_object_or_404(Task, pk=task_id)
-#     task.delete()
-#     return redirect('tasks:project_detail', project_id=project_id)
+def delete_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    project.delete()
+    return redirect('tasks:projects_list')
+
+
+def delete_task(request, project_id, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.delete()
+    return redirect('tasks:project_detail', project_id=project_id)
 
 
 class ProjectDeleteView(DeleteView):
