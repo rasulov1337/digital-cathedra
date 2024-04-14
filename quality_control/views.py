@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, DetailView
 
-from quality_control.forms import BugReportForm
+from quality_control.forms import BugReportForm, FeatureRequestForm
 from quality_control.models import BugReport, FeatureRequest
 
 
@@ -72,3 +72,14 @@ def create_bug_report(request):
     else:
         form = BugReportForm()
     return render(request, 'quality_control/bug_report_form.html', {'form': form})
+
+
+def create_feature_request(request):
+    if request.method == 'POST':
+        form = FeatureRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('quality_control:features')
+    else:
+        form = FeatureRequestForm()
+    return render(request, 'quality_control/feature_request_form.html', {'form': form})
