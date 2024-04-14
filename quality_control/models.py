@@ -15,6 +15,9 @@ class BugReport(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title + ' ' + self.get_status_display()
+
 
 class FeatureRequest(models.Model):
     title = models.CharField(max_length=255)
@@ -27,3 +30,6 @@ class FeatureRequest(models.Model):
     priority = models.IntegerField(choices=PRIORITY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title + ' ' + self.get_status_display()
