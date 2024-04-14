@@ -1,10 +1,12 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+    <p><a href="{% url 'quality_control:update_feature_request' feature.id %}">Изменить запрос</a></p>
+    <p><a href="{% url 'quality_control:delete_feature_request' feature.id %}">Удалить запрос</a></p>
     <h1>Title: {{ feature.title }}</h1>
     <p>Description: {{ feature.description }}</p>
-    <p>Project: {{ feature.project }}</p>
-    <p>Task: {{ feature.task }}</p>
+    <p><a href="{% url 'tasks:project_detail' feature.project.id %}">Project: {{ feature.project }}</a></p>
+    <p><a href="{% url 'tasks:task_detail' feature.project.id feature.task.id %}">Task: {{ feature.task }}</a></p>
     <p>Status: {{ feature.get_status_display }}</p>
     <p>Priority: {{ feature.priority }}</p>
     <p>Created at: {{ feature.created_at }}</p>

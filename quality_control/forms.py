@@ -11,7 +11,7 @@ class BugReportForm(forms.ModelForm):
 class FeatureRequestForm(forms.ModelForm):
     class Meta:
         model = FeatureRequest
-        fields = ['title', 'description', 'status', 'priority']
+        fields = ['title', 'description', 'project', 'task', 'status', 'priority']
 
 
 class FeedbackForm(forms.Form):

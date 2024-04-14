@@ -1,10 +1,12 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    <h1>{{ bug.name }}</h1>
-    <p>{{ bug.description }}</p>
-    <p>Project: {{ bug.project }}</p>
-    <p>Task: {{ bug.task }}</p>
+    <p><a href="{% url 'quality_control:update_bug_report' bug.id %}">Изменить отчет об ошибке</a></p>
+    <p><a href="{% url 'quality_control:delete_bug_report' bug.id %}">Удалить отчет об ошибке</a></p>
+    <h1>Title: {{ bug.title }}</h1>
+    <p>Description: {{ bug.description }}</p>
+    <p><a href="{% url 'tasks:project_detail' bug.project.id %}">Project: {{ bug.project }}</a></p>
+    <p><a href="{% url 'tasks:task_detail' bug.project.id bug.task.id %}">Task: {{ bug.task }}</a></p>
     <p>Status: {{ bug.get_status_display }}</p>
     <p>Priority: {{ bug.priority }}</p>
     <p>Created at: {{ bug.created_at }}</p>

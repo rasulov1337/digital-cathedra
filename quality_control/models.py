@@ -16,7 +16,7 @@ class BugReport(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + ' ' + self.get_status_display()
+        return self.title + ' [' + self.get_status_display() + ']'
 
 
 class FeatureRequest(models.Model):
@@ -32,4 +32,4 @@ class FeatureRequest(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + ' ' + self.get_status_display()
+        return self.title + ' [' + self.get_status_display() + ']'
