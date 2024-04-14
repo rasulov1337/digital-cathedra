@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, DetailView
 
+from quality_control.forms import BugReportForm
 from quality_control.models import BugReport, FeatureRequest
 
 
@@ -60,3 +61,14 @@ class FeatureDetailView(DetailView):
         feature = self.object
 
         return render(request, 'quality_control/feature_detail.html', {'feature': feature})
+
+
+def create_bug_report(request):
+    if request.method == 'POST':
+        form = BugReportForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('quality_control:bugs')
+    else:
+        form = BugReportForm()
+    return render(request, 'quality_control/bug_report_form.html', {'form': form})
